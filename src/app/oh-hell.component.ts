@@ -15,6 +15,7 @@ export class OhHellComponent implements OnInit {
     numberOfPlayers: number;
     players = new Array<Player>();
     trump: Card;
+    yourSelection: Card;
 
     ngOnInit() {
         const d = new Deck();
@@ -43,6 +44,7 @@ export class OhHellComponent implements OnInit {
     }
 
     playHand(dealerIndex: number) {
+        this.yourSelection = null;
 
         if (dealerIndex > 0) {
             let leadCard = this.players[dealerIndex].leadCard();
@@ -53,6 +55,14 @@ export class OhHellComponent implements OnInit {
         }
 
         alert('Your turn');
+
+        while (!this.yourSelection) {
+            
+        }
+
+        let index = this.players[0].hand.indexOf(this.yourSelection);
+        this.players[0].hand.splice(index, index + 1);
+
 
         for (let i = 1; i < dealerIndex; i++) {
 
@@ -76,7 +86,10 @@ export class OhHellComponent implements OnInit {
         });
     }
 
-    clicked() {
+    clicked(card: Card) {
         console.log('clicked');
+        console.log(card);
+
+        this.yourSelection = card;
     }
 }

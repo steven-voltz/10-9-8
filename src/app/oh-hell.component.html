@@ -31,7 +31,7 @@
 <h2>You</h2>
 <table>
     <tr>
-        <td (click)='clicked()' *ngFor='let card of players[0].hand' class='card'>
+        <td (click)='clicked(card)' *ngFor='let card of players[0].hand' class='card'>
             {{card.displayChar}}
             <br> 
             <img class='suit' *ngIf='card.suit === "Clubs"' src='../assets/club.png'>
