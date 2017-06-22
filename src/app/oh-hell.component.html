@@ -1,0 +1,39 @@
+<h1>Oh Hell</h1>
+
+
+<h2>{{players[2].name}}</h2>
+<table>
+    <tr>
+        <td *ngFor='let card of players[0].hand' class='cardBack'>
+            <img src='../assets/card.jpg' height='100%' width="100%">
+        </td>
+    </tr>
+</table>
+
+<h2>{{players[1].name}}</h2>
+<table>
+    <tr>
+        <td *ngFor='let card of players[0].hand' class='cardBack'>
+            <img src='../assets/card.jpg' height='100%' width="100%">
+        </td>
+    </tr>
+</table>
+
+
+
+<h2>You</h2>
+<table>
+    <tr>
+        <td (click)='clicked()' *ngFor='let card of players[0].hand' class='card'>
+            {{card.displayChar}}
+            <br> 
+            <img class='suit' *ngIf='card.suit === "clubs"' src='../assets/club.png'>
+            <img class='suit' *ngIf='card.suit === "spades"' src='../assets/spade.png'>
+            <img class='suit' *ngIf='card.suit === "hearts"' src='../assets/heart.png'>
+            <img class='suit' *ngIf='card.suit === "diamonds"' src='../assets/diamond.png'>
+            <br>
+            <span class='rightChar'>{{card.displayChar}}</span>
+
+        </td>
+    </tr>
+</table>
