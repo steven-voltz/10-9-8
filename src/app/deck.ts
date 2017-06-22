@@ -46,9 +46,5 @@ export class Deck {
         }
 
         this.deck = shuffledDeck;
-
-        console.log('Printing Deck');
-        console.log(this.deck);
-
     }
 }
