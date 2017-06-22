@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Deck } from './deck';
 import { Player } from './player';
+import { Card } from './card';
 
-@Component( {
+@Component({
     selector: 'app-oh-hell',
     templateUrl: './oh-hell.component.html',
-    styleUrls: [ './oh-hell.component.css' ]
+    styleUrls: ['./oh-hell.component.css']
 })
 export class OhHellComponent implements OnInit {
 
@@ -13,6 +14,7 @@ export class OhHellComponent implements OnInit {
     deck = new Deck();
     numberOfPlayers: number;
     players = new Array<Player>();
+    trump: Card;
 
     ngOnInit() {
         const d = new Deck();
@@ -22,7 +24,40 @@ export class OhHellComponent implements OnInit {
         this.players.push(new Player('Sandra'));
         this.players.push(new Player('Mike'));
 
-        this.dealHand();
+        //this.dealHand();
+        this.playGame();
+    }
+
+    playGame() {
+        let dealerIndex = Math.floor(Math.random() * this.numberOfPlayers);
+
+        while (this.numberOfCardsToDeal > 0) {
+            this.dealHand();
+
+            this.playHand(dealerIndex);
+
+            dealerIndex = (dealerIndex + 1) % this.numberOfPlayers;
+            this.numberOfCardsToDeal -= 1;
+            //this.clearHands();
+        }
+    }
+
+    playHand(dealerIndex: number) {
+
+        if (dealerIndex > 0) {
+            let leadCard = this.players[dealerIndex].leadCard();
+
+            for (let i = dealerIndex + 1; i < this.numberOfPlayers; i++) {
+                this.players[i].playCard(leadCard.suit);
+            }
+        }
+
+        alert('Your turn');
+
+        for (let i = 1; i < dealerIndex; i++) {
+
+        }
+
     }
 
     dealHand() {
@@ -31,6 +66,14 @@ export class OhHellComponent implements OnInit {
                 this.players[j].hand.push(this.deck.deck.pop());
             }
         }
+
+        this.trump = this.deck.deck.pop();
+    }
+
+    clearHands() {
+        this.players.forEach(player => {
+            player.hand = new Array<Card>();
+        });
     }
 
     clicked() {

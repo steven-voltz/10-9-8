@@ -12,10 +12,10 @@ export class Deck {
     private createDeck(): Array<Card> {
         let deck = new Array<Card>();
 
-        deck = deck.concat(this.createCardsForSuit('clubs'));
-        deck = deck.concat(this.createCardsForSuit('spades'));
-        deck = deck.concat(this.createCardsForSuit('hearts'));
-        deck = deck.concat(this.createCardsForSuit('diamonds'));
+        deck = deck.concat(this.createCardsForSuit('Clubs'));
+        deck = deck.concat(this.createCardsForSuit('Spades'));
+        deck = deck.concat(this.createCardsForSuit('Hearts'));
+        deck = deck.concat(this.createCardsForSuit('Diamonds'));
 
         return deck;
     }

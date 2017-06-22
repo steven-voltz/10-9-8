@@ -34,13 +34,17 @@
         <td (click)='clicked()' *ngFor='let card of players[0].hand' class='card'>
             {{card.displayChar}}
             <br> 
-            <img class='suit' *ngIf='card.suit === "clubs"' src='../assets/club.png'>
-            <img class='suit' *ngIf='card.suit === "spades"' src='../assets/spade.png'>
-            <img class='suit' *ngIf='card.suit === "hearts"' src='../assets/heart.png'>
-            <img class='suit' *ngIf='card.suit === "diamonds"' src='../assets/diamond.png'>
+            <img class='suit' *ngIf='card.suit === "Clubs"' src='../assets/club.png'>
+            <img class='suit' *ngIf='card.suit === "Spades"' src='../assets/spade.png'>
+            <img class='suit' *ngIf='card.suit === "Hearts"' src='../assets/heart.png'>
+            <img class='suit' *ngIf='card.suit === "Diamonds"' src='../assets/diamond.png'>
             <br>
             <span class='rightChar'>{{card.displayChar}}</span>
 
         </td>
     </tr>
 </table>
+
+<div>
+    <h1>Trump: {{trump.displayChar}} of {{trump.suit}}</h1>
+</div>
