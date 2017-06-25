@@ -46,6 +46,7 @@ export class GameComponent implements OnInit {
     }
 
     startComputerTurns() {
+        debugger;
         if (this.playerTurn !== 0) {
             this.leadCard = this.players[this.playerTurn].leadCard();
             this.playedCards[this.playerTurn] = this.leadCard;
@@ -53,6 +54,7 @@ export class GameComponent implements OnInit {
 
             while (this.playerTurn !== 0) {
                 this.playedCards[this.playerTurn] = this.players[this.playerTurn].playCard(this.leadCard.suit);
+                this.playerTurn = (this.playerTurn + 1) % this.players.length;
             }
         }
     }
@@ -65,22 +67,7 @@ export class GameComponent implements OnInit {
 
         this.leadPlayer = this.cardService.determineWinner(this.playedCards, this.leadCard.suit, this.trump.suit);
         this.playerTurn = this.leadPlayer;
-        this.turnOver = false;
-    }
-
-    playGame() {
-        let dealerIndex = Math.floor(Math.random() * this.numberOfPlayers);
-
-        while (this.numberOfCardsToDeal > 0) {
-            this.dealHand();
-
-            debugger;
-            //this.playHand(dealerIndex);
-
-            dealerIndex = (dealerIndex + 1) % this.numberOfPlayers;
-            this.numberOfCardsToDeal -= 1;
-            //this.clearHands();
-        }
+        this.turnOver = true;
     }
 
     dealHand() {
@@ -109,6 +96,19 @@ export class GameComponent implements OnInit {
 
             this.playerTurn = 1;
             this.finishComputerTurns();
+        }
+    }
+
+    continue() {
+        this.turnOver = false;
+        debugger;
+        if (this.players[0].hand.length > 0) {
+            this.playedCards = [null, null, null, null];
+            this.startComputerTurns();
+        }
+        else {
+            this.numberOfCardsToDeal -= 1;
+            this.startHand();
         }
     }
 }

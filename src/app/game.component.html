@@ -50,3 +50,8 @@
 <p *ngIf='this.playedCards[1]'>Player 2 played: {{this.playedCards[1].displayChar}} of {{this.playedCards[1].suit}}</p>
 <p *ngIf='this.playedCards[2]'>Player 3 played: {{this.playedCards[2].displayChar}} of {{this.playedCards[2].suit}}</p>
 <p *ngIf='this.playedCards[3]'>Player 4 played: {{this.playedCards[3].displayChar}} of {{this.playedCards[3].suit}}</p>
+
+<div *ngIf='turnOver'>
+    <p>Player {{leadPlayer + 1}} won</p>
+    <button (click)='continue()'>Continue</button>
+</div>
