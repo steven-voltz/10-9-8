@@ -1,0 +1,47 @@
+<h2>{{players[2].name}}</h2>
+<table>
+    <tr>
+        <td *ngFor='let card of players[0].hand' class='cardBack'>
+            <img src='../assets/card.jpg' height='100%' width="100%">
+        </td>
+    </tr>
+</table>
+
+<h2>{{players[1].name}}</h2>
+<table>
+    <tr>
+        <td *ngFor='let card of players[0].hand' class='cardBack'>
+            <img src='../assets/card.jpg' height='100%' width="100%">
+        </td>
+    </tr>
+</table>
+
+<h2>{{players[3].name}}</h2>
+<table>
+    <tr>
+        <td *ngFor='let card of players[0].hand' class='cardBack'>
+            <img src='../assets/card.jpg' height='100%' width="100%">
+        </td>
+    </tr>
+</table>
+
+<h2>You</h2>
+<table>
+    <tr>
+        <td (click)='clicked(card)' *ngFor='let card of players[0].hand' class='card'>
+            {{card.displayChar}}
+            <br> 
+            <img class='suit' *ngIf='card.suit === "Clubs"' src='../assets/club.png'>
+            <img class='suit' *ngIf='card.suit === "Spades"' src='../assets/spade.png'>
+            <img class='suit' *ngIf='card.suit === "Hearts"' src='../assets/heart.png'>
+            <img class='suit' *ngIf='card.suit === "Diamonds"' src='../assets/diamond.png'>
+            <br>
+            <span class='rightChar'>{{card.displayChar}}</span>
+
+        </td>
+    </tr>
+</table>
+
+<div>
+    <h1>Trump: {{trump.displayChar}} of {{trump.suit}}</h1>
+</div>

@@ -4,29 +4,35 @@ import { Player } from './player';
 import { Card } from './card';
 
 @Component({
-    selector: 'app-oh-hell',
-    templateUrl: './oh-hell.component.html',
-    styleUrls: ['./oh-hell.component.css']
+    selector: 'app-game',
+    templateUrl: './game.component.html',
+    styleUrls: ['./game.component.css']
 })
-export class OhHellComponent implements OnInit {
+export class GameComponent implements OnInit {
 
     numberOfCardsToDeal = 10;
-    deck = new Deck();
+    deck: Deck;
     numberOfPlayers: number;
     players = new Array<Player>();
+    playerTurn = 0;
     trump: Card;
     yourSelection: Card;
+    leadCard: Card;
+    playedCards: Array<Card> = [null, null, null, null];
+    turnOver = false;
 
     ngOnInit() {
-        const d = new Deck();
-
         this.players.push(new Player('You'));
         this.players.push(new Player('Tom'));
         this.players.push(new Player('Sandra'));
         this.players.push(new Player('Mike'));
 
-        //this.dealHand();
-        this.playGame();
+        this.startHand();
+    }
+
+    startHand() {
+        this.deck = new Deck();
+        this.dealHand();
     }
 
     playGame() {

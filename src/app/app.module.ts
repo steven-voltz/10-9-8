@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { GameComponent } from './game.component';
 import { ShellComponent } from './shell.component';
 import { OhHellComponent } from './oh-hell.component';
 import { LoginComponent } from './login.component';
@@ -9,13 +10,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
-    ShellComponent, OhHellComponent, LoginComponent
+    ShellComponent, OhHellComponent, LoginComponent, GameComponent
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot([
       {
         path: 'main',
-        component: OhHellComponent
+        component: GameComponent
       },
       {
         path: 'login',
