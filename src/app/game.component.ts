@@ -40,10 +40,13 @@ export class GameComponent implements OnInit {
     startHand() {
         this.deck = new Deck();
         this.dealHand();
+
+        console.log(this.playerTurn);
+        this.startComputerTurns();
     }
 
     startComputerTurns() {
-        if (this.playerTurn == 0) {
+        if (this.playerTurn !== 0) {
             this.leadCard = this.players[this.playerTurn].leadCard();
             this.playedCards[this.playerTurn] = this.leadCard;
             this.playerTurn = (this.playerTurn + 1) % this.players.length;
