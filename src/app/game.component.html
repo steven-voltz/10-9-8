@@ -45,3 +45,8 @@
 <div>
     <h1>Trump: {{trump.displayChar}} of {{trump.suit}}</h1>
 </div>
+
+<p *ngIf='this.playedCards[0]'>Player 1 played: {{this.playedCards[0].displayChar}} of {{this.playedCards[0].suit}}</p>
+<p *ngIf='this.playedCards[1]'>Player 2 played: {{this.playedCards[1].displayChar}} of {{this.playedCards[1].suit}}</p>
+<p *ngIf='this.playedCards[2]'>Player 3 played: {{this.playedCards[2].displayChar}} of {{this.playedCards[2].suit}}</p>
+<p *ngIf='this.playedCards[3]'>Player 4 played: {{this.playedCards[3].displayChar}} of {{this.playedCards[3].suit}}</p>
