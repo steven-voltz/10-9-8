@@ -25,7 +25,12 @@ export class Player {
             index++;
         }
 
-        return this.hand.splice(index - 1, index);
+        return this.hand.splice(index - 1, 1)[0];
     }
 
+    playUserSelectedCard(card: Card) {
+        const index = this.hand.indexOf(card);
+
+        return this.hand.splice(index, 1)[0];
+    }
 }

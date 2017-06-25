@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Deck } from './deck';
 import { Player } from './player';
 import { Card } from './card';
+import { CardService } from './card.service';
 
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
-    styleUrls: ['./game.component.css']
+    styleUrls: ['./game.component.css'],
+    providers: [ CardService ]
 })
 export class GameComponent implements OnInit {
 
@@ -15,11 +17,16 @@ export class GameComponent implements OnInit {
     numberOfPlayers: number;
     players = new Array<Player>();
     playerTurn = 0;
+    leadPlayer = 0;
     trump: Card;
     yourSelection: Card;
     leadCard: Card;
     playedCards: Array<Card> = [null, null, null, null];
     turnOver = false;
+
+    constructor(private cardService : CardService) {
+        
+    }
 
     ngOnInit() {
         this.players.push(new Player('You'));
@@ -35,6 +42,29 @@ export class GameComponent implements OnInit {
         this.dealHand();
     }
 
+    startComputerTurns() {
+        if (this.playerTurn == 0) {
+            this.leadCard = this.players[this.playerTurn].leadCard();
+            this.playedCards[this.playerTurn] = this.leadCard;
+            this.playerTurn = (this.playerTurn + 1) % this.players.length;
+
+            while (this.playerTurn !== 0) {
+                this.playedCards[this.playerTurn] = this.players[this.playerTurn].playCard(this.leadCard.suit);
+            }
+        }
+    }
+
+    finishComputerTurns() {
+        while (this.playerTurn !== this.leadPlayer) {
+            this.playedCards[this.playerTurn] = this.players[this.playerTurn].playCard(this.leadCard.suit);
+            this.playerTurn = (this.playerTurn + 1) % this.players.length;
+        }
+
+        this.leadPlayer = this.cardService.determineWinner(this.playedCards, this.leadCard.suit, this.trump.suit);
+        this.playerTurn = this.leadPlayer;
+        this.turnOver = false;
+    }
+
     playGame() {
         let dealerIndex = Math.floor(Math.random() * this.numberOfPlayers);
 
@@ -42,43 +72,12 @@ export class GameComponent implements OnInit {
             this.dealHand();
 
             debugger;
-            this.playHand(dealerIndex);
+            //this.playHand(dealerIndex);
 
             dealerIndex = (dealerIndex + 1) % this.numberOfPlayers;
             this.numberOfCardsToDeal -= 1;
             //this.clearHands();
         }
-    }
-
-    playHand(dealerIndex: number) {
-        this.yourSelection = null;
-
-        if (dealerIndex > 0) {
-            let leadCard = this.players[dealerIndex].leadCard();
-
-            for (let i = dealerIndex + 1; i < this.numberOfPlayers; i++) {
-                this.players[i].playCard(leadCard.suit);
-            }
-        }
-
-        alert('Your turn');
-
-        while (!this.yourSelection) {
-            setTimeout(this.tell(), 1000);
-        }
-
-        let index = this.players[0].hand.indexOf(this.yourSelection);
-        this.players[0].hand.splice(index, index + 1);
-
-
-        for (let i = 1; i < dealerIndex; i++) {
-
-        }
-
-    }
-
-    tell() {
-        console.log('Waiting');
     }
 
     dealHand() {
@@ -97,10 +96,16 @@ export class GameComponent implements OnInit {
         });
     }
 
-    clicked(card: Card) {
-        console.log('clicked');
-        console.log(card);
+    clicked(selectedCard: Card) {
+        if (this.playerTurn === 0) {
+            this.playedCards[0] = this.players[0].playUserSelectedCard(selectedCard);
 
-        this.yourSelection = card;
+            if (!this.leadCard) {
+                this.leadCard = this.playedCards[0];
+            }
+
+            this.playerTurn = 1;
+            this.finishComputerTurns();
+        }
     }
 }
