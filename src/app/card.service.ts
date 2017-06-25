@@ -5,6 +5,7 @@ import { Card } from './card';
 export class CardService {
     determineWinner(playedCards: Array<Card>, leadSuit: string, trump: string) {
         let winningCard: number;
+        debugger;
 
         for (let i = 0; i < playedCards.length; i++) {
             if (trump === playedCards[i].suit) {
@@ -18,7 +19,7 @@ export class CardService {
             for (let i = 0; i < playedCards.length; i++) {
                 if (leadSuit === playedCards[i].suit) {
                     if (typeof winningCard === 'undefined' || playedCards[winningCard].value < playedCards[i].value) {
-                        winningCard = 1;
+                        winningCard = i;
                     }
                 }
             }

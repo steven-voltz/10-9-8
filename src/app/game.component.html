@@ -7,8 +7,8 @@
     </tr>
 </table>
 
-<h2>{{players[1].name}}</h2>
-<table>
+<h2 *ngIf='false'>{{players[1].name}}</h2>
+<table *ngIf='false'>
     <tr>
         <td *ngFor='let card of players[0].hand' class='cardBack'>
             <img src='../assets/card.jpg' height='100%' width="100%">
@@ -16,8 +16,8 @@
     </tr>
 </table>
 
-<h2>{{players[3].name}}</h2>
-<table>
+<h2 *ngIf='false'>{{players[3].name}}</h2>
+<table *ngIf='false'>
     <tr>
         <td *ngFor='let card of players[0].hand' class='cardBack'>
             <img src='../assets/card.jpg' height='100%' width="100%">

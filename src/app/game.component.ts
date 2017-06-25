@@ -46,7 +46,6 @@ export class GameComponent implements OnInit {
     }
 
     startComputerTurns() {
-        debugger;
         if (this.playerTurn !== 0) {
             this.leadCard = this.players[this.playerTurn].leadCard();
             this.playedCards[this.playerTurn] = this.leadCard;
@@ -101,7 +100,7 @@ export class GameComponent implements OnInit {
 
     continue() {
         this.turnOver = false;
-        debugger;
+        
         if (this.players[0].hand.length > 0) {
             this.playedCards = [null, null, null, null];
             this.startComputerTurns();
