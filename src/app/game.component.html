@@ -46,10 +46,75 @@
     <h1>Trump: {{trump.displayChar}} of {{trump.suit}}</h1>
 </div>
 
+<!--
 <p *ngIf='this.playedCards[0]'>Player 1 played: {{this.playedCards[0].displayChar}} of {{this.playedCards[0].suit}}</p>
 <p *ngIf='this.playedCards[1]'>Player 2 played: {{this.playedCards[1].displayChar}} of {{this.playedCards[1].suit}}</p>
 <p *ngIf='this.playedCards[2]'>Player 3 played: {{this.playedCards[2].displayChar}} of {{this.playedCards[2].suit}}</p>
 <p *ngIf='this.playedCards[3]'>Player 4 played: {{this.playedCards[3].displayChar}} of {{this.playedCards[3].suit}}</p>
+-->
+
+<table>
+    <tr>
+        <td>Player 1</td>
+        <td>Player 2</td>
+        <td>Player 3</td>
+        <td>Player 4</td>
+    </tr>
+    <tr>
+        <td class='cardOuterColumn'>
+            <div *ngIf='this.playedCards[0]' class='cardDiv'>
+                {{this.playedCards[0].displayChar}}
+                <br> 
+                <img class='suit' *ngIf='this.playedCards[0].suit === "Clubs"' src='../assets/club.png'>
+                <img class='suit' *ngIf='this.playedCards[0].suit === "Spades"' src='../assets/spade.png'>
+                <img class='suit' *ngIf='this.playedCards[0].suit === "Hearts"' src='../assets/heart.png'>
+                <img class='suit' *ngIf='this.playedCards[0].suit === "Diamonds"' src='../assets/diamond.png'>
+                <br>
+                <span class='rightChar'>{{this.playedCards[0].displayChar}}</span>
+            </div>
+        </td>
+            
+        <td class='cardOuterColumn'>
+            <div *ngIf='this.playedCards[1]' class='cardDiv'>
+                {{this.playedCards[1].displayChar}}
+                <br> 
+                <img class='suit' *ngIf='this.playedCards[1].suit === "Clubs"' src='../assets/club.png'>
+                <img class='suit' *ngIf='this.playedCards[1].suit === "Spades"' src='../assets/spade.png'>
+                <img class='suit' *ngIf='this.playedCards[1].suit === "Hearts"' src='../assets/heart.png'>
+                <img class='suit' *ngIf='this.playedCards[1].suit === "Diamonds"' src='../assets/diamond.png'>
+                <br>
+                <span class='rightChar'>{{this.playedCards[1].displayChar}}</span>
+            </div>
+        </td>
+
+        <td class='cardOuterColumn'>
+            <div *ngIf='this.playedCards[2]' class='cardDiv'>
+                {{this.playedCards[2].displayChar}}
+                <br> 
+                <img class='suit' *ngIf='this.playedCards[2].suit === "Clubs"' src='../assets/club.png'>
+                <img class='suit' *ngIf='this.playedCards[2].suit === "Spades"' src='../assets/spade.png'>
+                <img class='suit' *ngIf='this.playedCards[2].suit === "Hearts"' src='../assets/heart.png'>
+                <img class='suit' *ngIf='this.playedCards[2].suit === "Diamonds"' src='../assets/diamond.png'>
+                <br>
+                <span class='rightChar'>{{this.playedCards[2].displayChar}}</span>
+            </div>
+        </td>
+
+        <td class='cardOuterColumn'>
+            <div *ngIf='this.playedCards[3]' class='cardDiv'>
+                {{this.playedCards[3].displayChar}}
+                <br> 
+                <img class='suit' *ngIf='this.playedCards[3].suit === "Clubs"' src='../assets/club.png'>
+                <img class='suit' *ngIf='this.playedCards[3].suit === "Spades"' src='../assets/spade.png'>
+                <img class='suit' *ngIf='this.playedCards[3].suit === "Hearts"' src='../assets/heart.png'>
+                <img class='suit' *ngIf='this.playedCards[3].suit === "Diamonds"' src='../assets/diamond.png'>
+                <br>
+                <span class='rightChar'>{{this.playedCards[3].displayChar}}</span>
+            </div>
+        </td>
+    </tr>
+    
+</table>
 
 <div *ngIf='turnOver'>
     <p>Player {{leadPlayer + 1}} won</p>

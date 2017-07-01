@@ -28,9 +28,27 @@ export class Player {
         return this.hand.splice(index - 1, 1)[0];
     }
 
-    playUserSelectedCard(card: Card) {
-        const index = this.hand.indexOf(card);
+    playUserSelectedCard(card: Card, leadSuit: string) {
 
-        return this.hand.splice(index, 1)[0];
+        let validSelection = true;
+
+        debugger;
+
+        if (leadSuit && card.suit !== leadSuit) {
+            this.hand.forEach(c => {
+                if (c.suit === leadSuit) {
+                    validSelection = false;
+                }
+            });
+        }
+        
+        if (validSelection) {
+            const index = this.hand.indexOf(card);
+
+            return this.hand.splice(index, 1)[0];
+        }
+        else {
+            return null;
+        }   
     }
 }

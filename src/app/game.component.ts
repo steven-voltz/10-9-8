@@ -8,7 +8,7 @@ import { CardService } from './card.service';
     selector: 'app-game',
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.css'],
-    providers: [ CardService ]
+    providers: [CardService]
 })
 export class GameComponent implements OnInit {
 
@@ -24,8 +24,8 @@ export class GameComponent implements OnInit {
     playedCards: Array<Card> = [null, null, null, null];
     turnOver = false;
 
-    constructor(private cardService : CardService) {
-        
+    constructor(private cardService: CardService) {
+
     }
 
     ngOnInit() {
@@ -67,6 +67,7 @@ export class GameComponent implements OnInit {
         this.leadPlayer = this.cardService.determineWinner(this.playedCards, this.leadCard.suit, this.trump.suit);
         this.playerTurn = this.leadPlayer;
         this.turnOver = true;
+        this.leadCard = null;
     }
 
     dealHand() {
@@ -87,22 +88,31 @@ export class GameComponent implements OnInit {
 
     clicked(selectedCard: Card) {
         if (this.playerTurn === 0) {
-            this.playedCards[0] = this.players[0].playUserSelectedCard(selectedCard);
-
-            if (!this.leadCard) {
-                this.leadCard = this.playedCards[0];
+            let leadSuit = null;
+            if (this.leadCard) {
+                leadSuit = this.leadCard.suit;
             }
 
-            this.playerTurn = 1;
-            this.finishComputerTurns();
+
+            this.playedCards[0] = this.players[0].playUserSelectedCard(selectedCard, leadSuit);
+
+            if (this.playedCards[0]) {
+                if (!this.leadCard) {
+                    this.leadCard = this.playedCards[0];
+                }
+
+                this.playerTurn = 1;
+                this.finishComputerTurns();
+            }
+
         }
     }
 
     continue() {
         this.turnOver = false;
-        
+        this.playedCards = [null, null, null, null];
+
         if (this.players[0].hand.length > 0) {
-            this.playedCards = [null, null, null, null];
             this.startComputerTurns();
         }
         else {
